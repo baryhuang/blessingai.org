@@ -6,7 +6,30 @@
     <title>修行之路的開始</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-50">
+<body class="bg-gradient-to-r from-[#01090F] to-[#071B2A] min-h-screen relative pb-20">
+    <!-- Navigation -->
+    <nav class="bg-gradient-to-r from-[#01090F] to-[#071B2A] border-b border-[#1F5C79]/20 py-4">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between">
+                <a href="/" class="text-2xl font-bold text-white">
+                    智慧事工平台
+                </a>
+                <div class="flex items-center gap-6">
+                    <a href="/" class="text-gray-300 hover:text-white transition-colors">
+                        首頁
+                    </a>
+                    <a href="/blog" class="text-gray-300 hover:text-white transition-colors">
+                        修行心得
+                    </a>
+                    <a href="#about" class="text-gray-300 hover:text-white transition-colors">
+                        關於我們
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
     <div class="max-w-4xl mx-auto px-4 py-8">
         <article class="prose lg:prose-xl mx-auto bg-white p-8 rounded-lg shadow-md">
             <h1 class="text-3xl font-bold mb-4">修行之路的開始</h1>
@@ -24,10 +47,23 @@
             </div>
         </article>
         <div class="mt-8 text-center">
-            <a href="/blog" class="text-blue-600 hover:text-blue-800">
+            <a href="/blog" class="text-blue-400 hover:text-blue-300">
                 返回文章列表
             </a>
         </div>
     </div>
+
+    <!-- Footer -->
+    <footer class="absolute bottom-0 left-0 right-0 bg-gradient-to-r from-[#01090F] to-[#071B2A] border-t border-[#1F5C79]/20">
+        <div class="container mx-auto px-4">
+            <div class="py-4 flex justify-center items-center gap-6">
+                <div class="flex items-center gap-6">
+                    <a href="#about" class="text-xs text-gray-400 hover:text-[#1F5C79] transition-colors">關於我們</a>
+                    <a href="#guide" class="text-xs text-gray-400 hover:text-[#1F5C79] transition-colors">使用指南</a>
+                    <a href="#contact" class="text-xs text-gray-400 hover:text-[#1F5C79] transition-colors">聯絡我們</a>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 </html> 

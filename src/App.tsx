@@ -13,7 +13,6 @@ import {
   X
 } from 'lucide-react';
 import Blog from './components/Blog';
-import BlogPost from './components/BlogPost';
 
 function ToolCard({ 
   icon: Icon, 
@@ -303,7 +302,6 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/:id" element={<BlogPost />} />
         </Routes>
 
         <Footer />
