@@ -19,7 +19,7 @@ const blogPosts: BlogPost[] = [
 const Blog: React.FC = () => {
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-8 text-center">修行心得分享</h1>
+      <h1 className="text-3xl font-bold mb-8 text-center">部落格分享</h1>
       <div className="grid gap-8">
         {blogPosts.map((post) => (
           <article key={post.id} className="bg-white p-6 rounded-lg shadow-md">

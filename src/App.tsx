@@ -185,15 +185,20 @@ function Navigation() {
     <nav className="bg-gradient-to-r from-[#01090F] to-[#071B2A] border-b border-[#1F5C79]/20 py-4">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
-          <Link to="/" className="text-2xl font-bold text-white">
-            智慧事工平台
+          <Link to="/" className="flex items-center gap-2">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white">
+              <path d="M16 4V28M9 16H23" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
+              <circle cx="16" cy="16" r="2" fill="currentColor"/>
+              <path d="M24 8L26 6M8 24L6 26M24 24L26 26M8 8L6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+            </svg>
+            <span className="text-2xl font-bold text-white">智慧事工平台</span>
           </Link>
           <div className="flex items-center gap-6">
             <Link to="/" className="text-gray-300 hover:text-white transition-colors">
               首頁
             </Link>
             <Link to="/blog" className="text-gray-300 hover:text-white transition-colors">
-              修行心得
+              部落格
             </Link>
             <a href="#about" className="text-gray-300 hover:text-white transition-colors">
               關於我們
