@@ -49,13 +49,13 @@ function ToolCard({
 
   return (
     <div 
-      className={`group relative w-[240px] overflow-hidden rounded-xl transition-all duration-500 ease-out mb-4
-        ${isHovered ? 'scale-[1.02] z-20' : 'z-10'}`}
+      className={`group relative w-full sm:w-[240px] overflow-hidden rounded-xl transition-all duration-500 ease-out mb-4
+        ${isHovered ? 'sm:scale-[1.02] sm:z-20' : 'sm:z-10'}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       style={{
         animation: `glow 3s ease-in-out ${index * 0.5}s infinite`,
-        height: '160px',
+        height: '120px sm:h-[160px]',
       }}
     >
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/50 to-black/90 z-10" />
@@ -92,10 +92,10 @@ function CenterInput() {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <div className="relative w-[500px]">
+    <div className="relative w-full sm:w-[500px] px-4 sm:px-0">
       <div className={`
         relative transition-all duration-500 ease-out
-        ${isExpanded ? 'scale-110' : ''}
+        ${isExpanded ? 'sm:scale-110' : ''}
       `}>
         <div className="absolute inset-0 bg-gradient-to-r from-[#1F5C79]/20 to-[#071B2A]/20 rounded-2xl blur-xl" />
         <div className="relative bg-gradient-to-r from-[#01090F]/90 to-[#071B2A]/90 rounded-2xl border border-[#1F5C79]/20 backdrop-blur-sm p-6">
@@ -123,7 +123,7 @@ function CenterInput() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="例如：我想為講道事工製作精華視頻..."
-              className="w-full pl-12 pr-12 py-3 bg-black/40 text-white placeholder-gray-400 rounded-xl border border-[#1F5C79]/20 focus:outline-none focus:ring-2 focus:ring-[#1F5C79]/40 transition-all"
+              className="w-full pl-12 pr-12 py-3 text-sm sm:text-base bg-black/40 text-white placeholder-gray-400 rounded-xl border border-[#1F5C79]/20 focus:outline-none focus:ring-2 focus:ring-[#1F5C79]/40 transition-all"
             />
             <button
               className="absolute right-4 top-1/2 -translate-y-1/2 text-[#1F5C79] hover:text-white transition-colors"
@@ -156,16 +156,16 @@ function DonationBar() {
 
   return (
     <div className="bg-gradient-to-r from-[#01090F] to-[#071B2A] border-b border-[#1F5C79]/20">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-2 sm:px-4">
         <div className="py-2 flex items-center justify-between">
-          <div className="flex items-center gap-2 text-gray-300 text-sm">
-            <Heart className="w-4 h-4 text-[#1F5C79]" />
+          <div className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm">
+            <Heart className="w-3 h-3 sm:w-4 sm:h-4 text-[#1F5C79]" />
             <span>支持我們繼續開發更多智能化事工工具</span>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-4">
             <a
               href="#donate"
-              className="text-xs px-3 py-1 rounded-full bg-[#1F5C79] text-white hover:bg-[#1F5C79]/80 transition-colors"
+              className="text-xs px-2 sm:px-3 py-1 rounded-full bg-[#1F5C79] text-white hover:bg-[#1F5C79]/80 transition-colors"
             >
               奉獻支持
             </a>
@@ -173,7 +173,7 @@ function DonationBar() {
               onClick={() => setIsVisible(false)}
               className="text-gray-400 hover:text-white transition-colors"
             >
-              <X className="w-4 h-4" />
+              <X className="w-3 h-3 sm:w-4 sm:h-4" />
             </button>
           </div>
         </div>
@@ -184,13 +184,13 @@ function DonationBar() {
 
 function Footer() {
   return (
-    <footer className="absolute bottom-0 left-0 right-0 bg-gradient-to-r from-[#01090F] to-[#071B2A] border-t border-[#1F5C79]/20">
+    <footer className="static sm:absolute bottom-0 left-0 right-0 bg-gradient-to-r from-[#01090F] to-[#071B2A] border-t border-[#1F5C79]/20">
       <div className="container mx-auto px-4">
-        <div className="py-4 flex justify-center items-center gap-6">
-          <div className="flex items-center gap-6">
-            <a href="#about" className="text-xs text-gray-400 hover:text-[#1F5C79] transition-colors">關於我們</a>
-            <a href="#guide" className="text-xs text-gray-400 hover:text-[#1F5C79] transition-colors">使用指南</a>
-            <a href="#contact" className="text-xs text-gray-400 hover:text-[#1F5C79] transition-colors">聯絡我們</a>
+        <div className="py-3 sm:py-4 flex flex-col sm:flex-row justify-center items-center gap-6">
+          <div className="flex flex-wrap justify-center gap-3 sm:gap-6">
+            <a href="#about" className="text-xs sm:text-base text-gray-400 hover:text-[#1F5C79] transition-colors">關於我們</a>
+            <a href="#guide" className="text-xs sm:text-base text-gray-400 hover:text-[#1F5C79] transition-colors">使用指南</a>
+            <a href="#contact" className="text-xs sm:text-base text-gray-400 hover:text-[#1F5C79] transition-colors">聯絡我們</a>
           </div>
         </div>
       </div>
@@ -200,31 +200,31 @@ function Footer() {
 
 function Navigation() {
   return (
-    <nav className="bg-gradient-to-r from-[#01090F] to-[#071B2A] border-b border-[#1F5C79]/20 py-4">
+    <nav className="bg-gradient-to-r from-[#01090F] to-[#071B2A] border-b border-[#1F5C79]/20 py-3 sm:py-4">
       <style>{globalStyles}</style>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2">
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white">
+          <Link to="/" className="flex items-center gap-1 sm:gap-2">
+            <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white">
               <path d="M16 4V28M9 16H23" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
               <circle cx="16" cy="16" r="2" fill="currentColor"/>
               <path d="M24 8L26 6M8 24L6 26M24 24L26 26M8 8L6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
             </svg>
-            <span className="text-2xl font-bold text-white animate-glow" style={{ 
+            <span className="text-xl sm:text-2xl font-bold text-white animate-glow" style={{ 
               animation: 'glow 2s ease-in-out infinite',
               textShadow: '0 0 20px rgba(99, 179, 237, 0.6)'
             }}>
               圣光工坊
             </span>
           </Link>
-          <div className="flex items-center gap-6">
-            <Link to="/" className="text-gray-300 hover:text-white transition-colors">
+          <div className="flex items-center gap-3 sm:gap-6">
+            <Link to="/" className="text-xs sm:text-base text-gray-300 hover:text-white transition-colors">
               首頁
             </Link>
-            <Link to="/blog" className="text-gray-300 hover:text-white transition-colors">
+            <Link to="/blog" className="text-xs sm:text-base text-gray-300 hover:text-white transition-colors">
               部落格
             </Link>
-            <a href="#about" className="text-gray-300 hover:text-white transition-colors">
+            <a href="#about" className="hidden sm:inline text-xs sm:text-base text-gray-300 hover:text-white transition-colors">
               關於我們
             </a>
           </div>
@@ -279,20 +279,20 @@ function HomePage() {
 
   return (
     <div className="container mx-auto px-4 pt-8">
-      <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold text-white mb-4 animate-glow" style={{ 
+      <div className="text-center mb-8 sm:mb-12">
+        <h1 className="text-2xl sm:text-4xl font-bold text-white mb-4 animate-glow" style={{ 
           animation: 'glow 2s ease-in-out infinite',
           textShadow: '0 0 30px rgba(99, 179, 237, 0.8)'
         }}>
           圣光工坊
         </h1>
-        <p className="text-lg text-gray-400 max-w-2xl mx-auto">
+        <p className="text-sm sm:text-lg text-gray-400 max-w-2xl mx-auto">
           為現代事工提供智能化工具，讓聖光傳播更加溫暖高效
         </p>
       </div>
 
-      <div className="flex justify-center items-start gap-6">
-        <div className="flex flex-col items-end">
+      <div className="flex flex-col sm:flex-row justify-center items-start gap-4 sm:gap-6">
+        <div className="order-2 sm:order-1 flex flex-col w-full sm:w-auto items-center sm:items-end">
           {leftTools.map((tool, index) => (
             <ToolCard
               key={tool.title}
@@ -305,9 +305,11 @@ function HomePage() {
           ))}
         </div>
 
-        <CenterInput />
+        <div className="order-1 sm:order-2 w-full flex justify-center">
+          <CenterInput />
+        </div>
 
-        <div className="flex flex-col items-start">
+        <div className="order-3 sm:order-3 flex flex-col w-full sm:w-auto items-center sm:items-start">
           {rightTools.map((tool, index) => (
             <ToolCard
               key={tool.title}
