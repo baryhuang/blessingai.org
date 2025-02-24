@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 interface BlogPost {
   id: string;
@@ -14,12 +13,6 @@ const blogPosts: BlogPost[] = [
     title: '修行之路的開始',
     summary: '踏上修行之路的初心與體悟',
     date: '2024-02-24'
-  },
-  {
-    id: '2',
-    title: '冥想的力量',
-    summary: '通過冥想找到內心的平靜',
-    date: '2024-02-23'
   }
 ];
 
@@ -31,9 +24,9 @@ const Blog: React.FC = () => {
         {blogPosts.map((post) => (
           <article key={post.id} className="bg-white p-6 rounded-lg shadow-md">
             <h2 className="text-2xl font-semibold mb-2">
-              <Link to={`/blog/${post.id}`} className="text-blue-600 hover:text-blue-800">
+              <a href={`/blog/${post.id}.html`} className="text-blue-600 hover:text-blue-800">
                 {post.title}
-              </Link>
+              </a>
             </h2>
             <p className="text-gray-600 mb-4">{post.summary}</p>
             <div className="text-sm text-gray-500">{post.date}</div>
