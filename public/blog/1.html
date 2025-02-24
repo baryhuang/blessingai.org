@@ -1,69 +1,581 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>修行之路的開始</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI短片制作基础</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* 更新和添加样式 */
+    .step-title {
+      background-color: #f0f4ff;
+      padding: 1rem;
+      border-left: 4px solid #3b82f6;
+      color: #1e3a8a;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      border-radius: 0.5rem;
+    }
+    .section-box {
+      background-color: #ffffff;
+      padding: 2rem;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      margin-bottom: 2rem;
+    }
+    .prompt-box {
+      background-color: #f8fafc;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      font-family: ui-monospace, monospace;
+      color: #334155;
+      border: 1px solid #e2e8f0;
+      margin-bottom: 1rem;
+    }
+    .scene-section {
+      border-left: 4px solid #3b82f6;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      background: linear-gradient(to right, #f0f4ff, #ffffff);
+      border-radius: 0.75rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    .scene-title {
+      color: #1e40af;
+      padding: 0.75rem 0;
+      border-bottom: 2px solid #dbeafe;
+      margin-bottom: 1.5rem;
+      font-size: 1.25rem;
+    }
+    .scene-description {
+      color: #1f2937;
+      font-style: italic;
+      padding: 1rem;
+      background-color: #ffffff;
+      border-radius: 0.5rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+      border: 1px solid #e5e7eb;
+    }
+    .scene-prompts {
+      background-color: #ffffff;
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    /* 添加新样式 */
+    .tool-list {
+      background-color: #f8fafc;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .tool-list li {
+      margin-bottom: 0.75rem;
+      padding: 0.5rem;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .tool-list li:last-child {
+      border-bottom: none;
+    }
+    .example-table {
+      background-color: #ffffff;
+      border-radius: 0.5rem;
+      overflow: hidden;
+    }
+    .example-table th {
+      background-color: #f1f5f9;
+      padding: 0.75rem 1rem;
+    }
+    .example-table td {
+      padding: 1rem;
+    }
+    /* 响应式调整 */
+    @media (max-width: 768px) {
+      .section-box {
+        padding: 1rem;
+      }
+      .scene-section {
+        padding: 1rem;
+      }
+    }
+    /* 添加新样式 */
+    .page-header {
+      background: linear-gradient(to right, #f0f4ff, #ffffff);
+      padding: 2rem;
+      border-radius: 0.75rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+    .page-title {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #1e40af;
+      margin-bottom: 1rem;
+    }
+    .page-meta {
+      color: #64748b;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1rem;
+    }
+    .content-section {
+      margin-bottom: 4rem;
+    }
+    .section-header {
+      font-size: 1.875rem;
+      font-weight: bold;
+      color: #1e40af;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid #dbeafe;
+    }
+  </style>
 </head>
 <body class="bg-gradient-to-r from-[#01090F] to-[#071B2A] min-h-screen relative pb-20">
-    <!-- Navigation -->
-    <nav class="bg-gradient-to-r from-[#01090F] to-[#071B2A] border-b border-[#1F5C79]/20 py-4">
-        <div class="container mx-auto px-4">
-            <div class="flex items-center justify-between">
-                <a href="/" class="text-2xl font-bold text-white">
-                    智慧事工平台
-                </a>
-                <div class="flex items-center gap-6">
-                    <a href="/" class="text-gray-300 hover:text-white transition-colors">
-                        首頁
-                    </a>
-                    <a href="/blog" class="text-gray-300 hover:text-white transition-colors">
-                        部落格
-                    </a>
-                    <a href="#about" class="text-gray-300 hover:text-white transition-colors">
-                        關於我們
-                    </a>
-                </div>
-            </div>
+  <!-- Navigation -->
+  <nav class="bg-gradient-to-r from-[#01090F] to-[#071B2A] border-b border-[#1F5C79]/20 py-4">
+    <div class="container mx-auto px-4">
+      <div class="flex items-center justify-between">
+        <a href="/" class="text-2xl font-bold text-white">智慧事工平台</a>
+        <div class="flex items-center gap-6">
+          <a href="/" class="text-gray-300 hover:text-white transition-colors">首頁</a>
+          <a href="/blog" class="text-gray-300 hover:text-white transition-colors">部落格</a>
+          <a href="#about" class="text-gray-300 hover:text-white transition-colors">關於我們</a>
         </div>
-    </nav>
-
-    <!-- Main Content -->
-    <div class="max-w-4xl mx-auto px-4 py-8">
-        <article class="prose lg:prose-xl mx-auto bg-white p-8 rounded-lg shadow-md">
-            <h1 class="text-3xl font-bold mb-4">修行之路的開始</h1>
-            <div class="text-gray-500 mb-8">2024-02-24</div>
-            <div class="whitespace-pre-wrap">
-在這個快節奏的現代社會中，我們常常忘記了最重要的是什麼。修行不僅僅是一種宗教行為，更是一種生活態度，一種對生命的探索和理解。
-
-通過日常的修行，我們可以：
-1. 培養正念意識
-2. 提升心靈品質
-3. 找到內心的平靜
-4. 建立更好的人際關係
-
-修行之路沒有捷徑，需要持之以恆的練習和耐心。每一個當下都是修行的機會，讓我們一起在這條路上互相鼓勵和支持。
-            </div>
-        </article>
-        <div class="mt-8 text-center">
-            <a href="/blog" class="text-blue-400 hover:text-blue-300">
-                返回文章列表
-            </a>
-        </div>
+      </div>
     </div>
+  </nav>
 
-    <!-- Footer -->
-    <footer class="absolute bottom-0 left-0 right-0 bg-gradient-to-r from-[#01090F] to-[#071B2A] border-t border-[#1F5C79]/20">
-        <div class="container mx-auto px-4">
-            <div class="py-4 flex justify-center items-center gap-6">
-                <div class="flex items-center gap-6">
-                    <a href="#about" class="text-xs text-gray-400 hover:text-[#1F5C79] transition-colors">關於我們</a>
-                    <a href="#guide" class="text-xs text-gray-400 hover:text-[#1F5C79] transition-colors">使用指南</a>
-                    <a href="#contact" class="text-xs text-gray-400 hover:text-[#1F5C79] transition-colors">聯絡我們</a>
-                </div>
+  <!-- Main Content -->
+  <div class="w-[90%] lg:w-[80%] mx-auto px-4 py-12">
+    <!-- 页面标题 -->
+    <header class="page-header">
+      <h1 class="page-title">AI短片制作基础</h1>
+      <div class="page-meta">
+        <span>📅 2024-06-20</span>
+        <span>·</span>
+        <span>🔄 更新至 2025-02-23</span>
+      </div>
+    </header>
+
+    <!-- 工具列表部分 -->
+    <section class="content-section">
+      <h2 class="section-header">��️ 工具列表</h2>
+      <div class="section-box">
+        <ul class="tool-list list-disc pl-5 text-gray-800">
+          <li><strong>DeepSeek Chat / ChatGPT</strong>：用于生成剧本脚本（链接：<a href="https://chat.deepseek.com" target="_blank" rel="nofollow noopener noreferrer" class="underline">DeepSeek Chat</a> 或 <a href="https://chat.openai.com" target="_blank" rel="nofollow noopener noreferrer" class="underline">ChatGPT</a>）</li>
+          <li><strong>Midjourney</strong>：生成分镜场景图（链接：<a href="https://www.midjourney.com/app" target="_blank" rel="nofollow noopener noreferrer" class="underline">Midjourney</a>）</li>
+          <li><strong>可灵AI</strong>：生成视频初稿及动画效果（链接：<a href="https://www.kling.ai" target="_blank" rel="nofollow noopener noreferrer" class="underline">可灵AI</a>）</li>
+          <li><strong>海螺AI</strong>：制作配音（链接：<a href="https://www.hailuo.ai" target="_blank" rel="nofollow noopener noreferrer" class="underline">海螺AI</a>）</li>
+          <li><strong>Udio</strong>：添加背景音乐（链接：<a href="https://udio.com" target="_blank" rel="nofollow noopener noreferrer" class="underline">Udio</a>）</li>
+          <li><strong>剪映专业版</strong>：后期剪辑与字幕处理（链接：<a href="https://www.capcut.cn" target="_blank" rel="nofollow noopener noreferrer" class="underline">剪映专业版</a>）</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 制作步骤部分 -->
+    <section class="content-section">
+      <h2 class="section-header">📝 短片制作步骤</h2>
+      <div class="space-y-8">
+        <!-- 第一步：AI写脚本 -->
+        <section class="section-box">
+          <h3 class="step-title">第一步：AI写脚本</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- 左侧说明 -->
+            <div class="space-y-4 text-gray-800">
+              <p>
+                利用 <a href="https://chat.deepseek.com" target="_blank" rel="nofollow noopener noreferrer" class="underline">DeepSeek Chat</a> 或 <a href="https://chat.openai.com" target="_blank" rel="nofollow noopener noreferrer" class="underline">ChatGPT</a> 快速构思剧本。示例 prompt 如下：
+              </p>
+              <div class="prompt-box">
+                请帮我写一个3分钟视频脚本，主题为"GOD IS SPEAKING"。要求：
+                1. 以现代都市生活为背景，展现一天中的奇迹时刻
+                2. 通过光影、物件等细节传达神的启示与温暖力量
+                3. 分为片头(10秒)、清晨(40秒)、通勤(30秒)、职场(50秒)、归途(40秒)、结尾(10秒)六个段落
+                4. 重点描绘每个场景中的奇迹元素，确保前后呼应
+                5. 整体风格要真实感人，富有张力
+              </div>
             </div>
+            <!-- 右侧示例 -->
+            <div>
+              <table class="w-full border-collapse border border-gray-300">
+                <tr class="bg-gray-100">
+                  <th class="py-2 px-2 text-left border border-gray-300">操作步骤</th>
+                  <th class="py-2 px-2 text-left border border-gray-300">实战示例</th>
+                </tr>
+                <tr>
+                  <td class="py-2 px-2 border border-gray-300">输入主题大纲</td>
+                  <td class="py-2 px-2 border border-gray-300">
+                    主题：<strong>GOD IS SPEAKING</strong><br>
+                    分段：片头10秒、清晨40秒、通勤30秒、职场50秒、归途40秒、结尾10秒<br>
+                    风格：现代都市、光影奇迹、真实感人
+                  </td>
+                </tr>
+                <tr>
+                  <td class="py-2 px-2 border border-gray-300">场景描述</td>
+                  <td class="py-2 px-2 border border-gray-300">
+                    片头："破晓时分，城市天际线被金色晨光划破..."<br>
+                    清晨："闹钟响起，窗外第一缕阳光投射出非自然光影..."<br>
+                    通勤："后视镜中出现洁白飞鸟，路边标语随风摇曳..."
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- 第二步：AI生成分镜 -->
+        <section class="section-box">
+          <h3 class="step-title">第二步：AI生成分镜</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="space-y-4 text-gray-800">
+              <div class="prompt-box">
+                Midjourney prompt:<br>
+                "破晓时分的城市天际线，金色晨光划破云层，云间闪烁着神秘光芒，电影感构图，高对比度，光影交错 --ar 16:9 --v 5 --style raw --q 2"
+              </div>
+            </div>
+            <div>
+              <table class="w-full border-collapse border border-gray-300">
+                <tr class="bg-gray-100">
+                  <th class="py-2 px-2 text-left border border-gray-300">操作步骤</th>
+                  <th class="py-2 px-2 text-left border border-gray-300">实战示例</th>
+                </tr>
+                <tr>
+                  <td class="py-2 px-2 border border-gray-300">场景描述</td>
+                  <td class="py-2 px-2 border border-gray-300">
+                    清晨："室内晨光场景，窗外阳光透过窗帘，墙上形成奇异光影，光花效果 --ar 16:9 --v 5"
+                  </td>
+                </tr>
+                <tr>
+                  <td class="py-2 px-2 border border-gray-300">其他场景</td>
+                  <td class="py-2 px-2 border border-gray-300">
+                    职场："会议室内部，聚焦发光便签，同事投来意味深长的目光，电影感 --ar 16:9 --v 5"
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- 第三步：生成视频 -->
+        <section class="section-box">
+          <h3 class="step-title">第三步：生成视频</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="space-y-4 text-gray-800">
+              <div class="prompt-box">
+                可灵AI提示词：<br>
+                "生成一段10秒片头视频，要求：
+                1. 从城市天际线俯拍视角开始
+                2. 使用慢镜头效果展现晨光穿透云层的瞬间
+                3. 添加光芒闪烁和光晕扩散效果
+                4. 最后转场至优雅淡入的黑屏字幕
+                5. 整体画面风格电影感强，色调偏金色温暖"
+              </div>
+            </div>
+            <div class="space-y-4">
+              <ul class="list-disc pl-5 text-gray-800">
+                <li>上传 Midjourney 分镜图片</li>
+                <li>设置镜头动作与转场效果</li>
+                <li>调整视频长度与节奏</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- 第四步：制作配音 -->
+        <section class="section-box">
+          <h3 class="step-title">第四步：制作配音</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="space-y-4 text-gray-800">
+              <div class="prompt-box">
+                海螺AI提示词：<br>
+                "生成一段低语配音，要求：
+                1. 使用温暖磁性的青年男声
+                2. 语速0.9，语气庄重而神秘
+                3. 情感真挚，带有启示感
+                4. 在'你，正被看见'处添加回声效果
+                5. 背景加入细微的晨光微风声"
+              </div>
+            </div>
+            <div>
+              <table class="w-full border-collapse border border-gray-300">
+                <tr class="bg-gray-100">
+                  <th class="py-2 px-2 text-left border border-gray-300">操作步骤</th>
+                  <th class="py-2 px-2 text-left border border-gray-300">示例设置</th>
+                </tr>
+                <tr>
+                  <td class="py-2 px-2 border border-gray-300">选择音色</td>
+                  <td class="py-2 px-2 border border-gray-300">青年男声，磁性温暖，语气庄重神秘</td>
+                </tr>
+                <tr>
+                  <td class="py-2 px-2 border border-gray-300">调整语速</td>
+                  <td class="py-2 px-2 border border-gray-300">语速0.9，添加回声效果，配合晨光微风声</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- 第五步：添加音乐 -->
+        <section class="section-box">
+          <h3 class="step-title">第五步：添加音乐</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="space-y-4 text-gray-800">
+              <div class="prompt-box">
+                Udio提示词：<br>
+                "创作一段配乐，要求：
+                1. 开场使用低沉神秘的弦乐
+                2. 过渡到温暖的钢琴主旋律
+                3. 高潮处加入交响乐元素
+                4. 结尾回归钢琴独奏，渐弱收尾
+                5. 配合视频节奏，在关键奇迹时刻突出音效"
+              </div>
+            </div>
+            <div class="space-y-4">
+              <ul class="list-disc pl-5 text-gray-800">
+                <li>选择钢琴主旋律与弦乐衬托</li>
+                <li>添加环境音：城市背景、教堂钟声</li>
+                <li>调节转场渐变效果</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- 第六步：后期剪辑 -->
+        <section class="section-box">
+          <h3 class="step-title">第六步：后期剪辑</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="space-y-4 text-gray-800">
+              <p>
+                使用剪映专业版整合所有素材，并进行剪辑处理。示例指令：
+              </p>
+              <div class="prompt-box">
+                导入视频、配音与音乐素材，剪切至合适时长，加入淡入淡出转场效果，同时在关键镜头上添加同步字幕，确保节奏流畅且情感饱满。
+              </div>
+            </div>
+            <div class="space-y-4">
+              <ul class="list-disc pl-5 text-gray-800">
+                <li>导入视频、配音和背景音乐</li>
+                <li>调整片段时长与转场效果</li>
+                <li>平衡音量，添加字幕标题</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <!-- 脚本应用案例部分 -->
+    <section class="content-section">
+      <h2 class="section-header">🎬 以脚本为主线的工具应用案例</h2>
+      <div class="section-box">
+        <div class="space-y-8">
+          <!-- 片头 -->
+          <div class="scene-section">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              <div class="space-y-4">
+                <h3 class="scene-title text-xl font-bold">【片头】（0:00-0:10）</h3>
+                <p class="scene-description">
+                  描述：破晓时分，城市天际线被金色晨光划破，云层中隐约闪烁着奇异光芒；黑屏字幕显示"奇迹，从未远离"，低语声缓缓响起"你，正被看见……"。
+                </p>
+              </div>
+              <div class="scene-prompts space-y-4">
+                <div class="prompt-box mb-4">
+                  <strong>Midjourney提示词：</strong><br>
+                  "破晓时分的城市天际线，金色晨光划破云层，云间闪烁着神秘光芒，电影感构图，高对比度，光影交错 --ar 16:9 --v 5 --style raw --q 2"
+                </div>
+                <div class="prompt-box mb-4">
+                  <strong>可灵AI提示词：</strong><br>
+                  "1. 从城市天际线俯拍视角开始
+                  2. 添加晨光穿透云层的动态效果
+                  3. 使用慢镜头展现光芒闪烁
+                  4. 转场至黑屏字幕，字体发光"
+                </div>
+                <div class="prompt-box">
+                  <strong>海螺AI配音：</strong><br>
+                  "低语音效，语速0.9，'你，正被看见'添加回声
+                  背景配乐：晨光初现的弦乐渐起"
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 清晨篇 -->
+          <div class="scene-section">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              <div class="space-y-4">
+                <h3 class="scene-title text-xl font-bold">【清晨篇】（0:11-0:50）</h3>
+                <p class="scene-description">
+                  描述：闹钟响起，男主关闭闹钟时窗外第一缕阳光在墙上投射出非自然光影，仿若绽放的光花；便签上写着"你的一切，都有意义"，隐隐发光。
+                </p>
+              </div>
+              <div class="scene-prompts space-y-4">
+                <div class="prompt-box mb-4">
+                  <strong>Midjourney场景组：</strong><br>
+                  1. "卧室内部，晨光透过窗帘，墙上形成光花图案，温暖色调 --ar 16:9 --v 5"<br>
+                  2. "床头柜特写，便签纸上文字发光，周围光晕扩散 --ar 16:9 --v 5"
+                </div>
+                <div class="prompt-box mb-4">
+                  <strong>可灵AI动画：</strong><br>
+                  "1. 闹钟响起配合震动特效
+                  2. 阳光投射动态光斑效果
+                  3. 便签文字渐现发光动画
+                  4. 场景间柔和转场"
+                </div>
+                <div class="prompt-box">
+                  <strong>音效处理：</strong><br>
+                  "1. 闹钟声渐强后突停
+                  2. 加入清晨鸟鸣环境音
+                  3. 光影出现时配乐升华"
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 通勤篇 -->
+          <div class="scene-section">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              <div class="space-y-4">
+                <h3 class="scene-title text-xl font-bold">【通勤篇】（0:51-1:20）</h3>
+                <p class="scene-description">
+                  描述：男主倒车时后视镜中出现一只洁白的飞鸟，红灯下路边标语"今日，奇迹会降临"随风摇曳。
+                </p>
+              </div>
+              <div class="scene-prompts space-y-4">
+                <div class="prompt-box mb-4">
+                  <strong>Midjourney场景：</strong><br>
+                  1. "车内视角，后视镜中白鸟展翅，光芒四射 --ar 16:9 --v 5"<br>
+                  2. "城市十字路口，红灯下飘动的手写标语，晨光氛围 --ar 16:9 --v 5"
+                </div>
+                <div class="prompt-box mb-4">
+                  <strong>可灵AI特效：</strong><br>
+                  "1. 后视镜中飞鸟划过特效
+                  2. 标语纸张随风摆动动画
+                  3. 红灯光晕扩散效果"
+                </div>
+                <div class="prompt-box">
+                  <strong>配乐处理：</strong><br>
+                  "加入城市环境音，车流声，
+                  飞鸟出现时配乐升华"
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 职场篇 -->
+          <div class="scene-section">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              <div class="space-y-4">
+                <h3 class="scene-title text-xl font-bold">【职场篇】（1:21-2:10）</h3>
+                <p class="scene-description">
+                  描述：会议室内，一张便签上写着"每一刻，都藏着奇迹"，同事目光意味深长；午休时，男主的便当盒上浮现星辰般光影，低语"奇迹常在身边"。
+                </p>
+              </div>
+              <div class="scene-prompts space-y-4">
+                <div class="prompt-box mb-4">
+                  <strong>Midjourney分镜：</strong><br>
+                  1. "现代会议室内部，桌上发光便签特写，同事投来深意目光 --ar 16:9 --v 5"<br>
+                  2. "办公室午休场景，便当盒上星光点点，氛围梦幻 --ar 16:9 --v 5"
+                </div>
+                <div class="prompt-box mb-4">
+                  <strong>可灵AI动效：</strong><br>
+                  "1. 便签文字渐现动画
+                  2. 星光流动粒子效果
+                  3. 景深虚化转场处理"
+                </div>
+                <div class="prompt-box">
+                  <strong>音频制作：</strong><br>
+                  "1. 办公室环境音基底
+                  2. 低语配音加回声
+                  3. 星光出现时音效点缀"
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 归途篇 -->
+          <div class="scene-section">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              <div class="space-y-4">
+                <h3 class="scene-title text-xl font-bold">【归途篇】（2:11-2:50）</h3>
+                <p class="scene-description">
+                  描述：下班途中遇细雨，街角小店老板递来透明伞，伞面折射出梦境般光芒；车窗上出现纸条"你的光芒，温暖世界"。
+                </p>
+              </div>
+              <div class="scene-prompts space-y-4">
+                <div class="prompt-box mb-4">
+                  <strong>Midjourney场景：</strong><br>
+                  1. "雨中街角，透明伞面折射彩虹光芒，氛围梦幻 --ar 16:9 --v 5"<br>
+                  2. "车窗视角，雨滴背后温暖文字，光晕氤氲 --ar 16:9 --v 5"
+                </div>
+                <div class="prompt-box mb-4">
+                  <strong>可灵AI效果：</strong><br>
+                  "1. 雨滴落下动态效果
+                  2. 伞面光芒折射动画
+                  3. 车窗文字雾气显现"
+                </div>
+                <div class="prompt-box">
+                  <strong>音效设计：</strong><br>
+                  "1. 细雨声环境音
+                  2. 温柔钢琴主旋律
+                  3. 光芒出现时和弦升华"
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 结尾篇 -->
+          <div class="scene-section">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="space-y-4">
+                <h3 class="scene-title text-xl font-bold">【结尾篇】（2:51-3:00）</h3>
+                <p class="scene-description">
+                  描述：夜色中，男主走出家门，街灯下倒影与闪烁光影交织，一颗流星划破天际，与晨时奇迹呼应，字幕"奇迹，从未停息"渐显。
+                </p>
+              </div>
+              <div class="scene-prompts space-y-4">
+                <div class="prompt-box mb-4">
+                  <strong>Midjourney收尾：</strong><br>
+                  "夜晚街道，街灯光影交织，远处流星划过，画面富有诗意 --ar 16:9 --v 5 --style raw --q 2"
+                </div>
+                <div class="prompt-box mb-4">
+                  <strong>可灵AI结尾：</strong><br>
+                  "1. 流星划过动态特效
+                  2. 光影交织动画处理
+                  3. 字幕渐显发光效果
+                  4. 淡出转场收尾"
+                </div>
+                <div class="prompt-box">
+                  <strong>音乐收束：</strong><br>
+                  "1. 配乐升华到高潮
+                  2. 流星划过时音效点缀
+                  3. 钢琴旋律渐弱收尾"
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-    </footer>
+      </div>
+    </section>
+
+    <!-- 返回按钮 -->
+    <div class="mt-12 text-center">
+      <a href="/blog" class="text-blue-400 hover:text-blue-300 text-lg">返回文章列表</a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="absolute bottom-0 left-0 right-0 bg-gradient-to-r from-[#01090F] to-[#071B2A] border-t border-[#1F5C79]/20">
+    <div class="container mx-auto px-4">
+      <div class="py-4 flex justify-center items-center gap-6">
+        <div class="flex items-center gap-6">
+          <a href="#about" class="text-xs text-gray-400 hover:text-[#1F5C79] transition-colors">關於我們</a>
+          <a href="#guide" class="text-xs text-gray-400 hover:text-[#1F5C79] transition-colors">使用指南</a>
+          <a href="#contact" class="text-xs text-gray-400 hover:text-[#1F5C79] transition-colors">聯絡我們</a>
+        </div>
+      </div>
+    </div>
+  </footer>
 </body>
-</html> 
+</html>

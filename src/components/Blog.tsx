@@ -10,7 +10,7 @@ interface BlogPost {
 const blogPosts: BlogPost[] = [
   {
     id: '1',
-    title: '修行之路的開始',
+    title: 'AI短片制作基础',
     summary: '踏上修行之路的初心與體悟',
     date: '2024-02-24'
   }
