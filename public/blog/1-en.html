@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Short Film Production Basics</title>
+  <!-- Same styles as 1.html -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* 更新和添加样式 */
+    .step-title {
+      background-color: #f3f4f6;
+      padding: 1rem;
+      border-left: 4px solid #3b82f6;
+      color: #1f2937;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      border-radius: 0.5rem;
+    }
+    .section-box {
+      background-color: #ffffff;
+      padding: 2rem;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      margin-bottom: 2rem;
+    }
+    .prompt-box {
+      background-color: #f8fafc;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      font-family: ui-monospace, monospace;
+      color: #334155;
+      border: 1px solid #e2e8f0;
+      margin-bottom: 1rem;
+    }
+    .scene-section {
+      border-left: 4px solid #3b82f6;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      background: #ffffff;
+      border-radius: 0.75rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    .scene-title {
+      color: #1f2937;
+      padding: 0.75rem 0;
+      border-bottom: 2px solid #dbeafe;
+      margin-bottom: 1.5rem;
+      font-size: 1.25rem;
+    }
+    .scene-description {
+      color: #1f2937;
+      font-style: italic;
+      padding: 1rem;
+      background-color: #ffffff;
+      border-radius: 0.5rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+      border: 1px solid #e5e7eb;
+    }
+    .scene-prompts {
+      background-color: #ffffff;
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    /* 添加新样式 */
+    .tool-list {
+      background-color: #f8fafc;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .tool-list li {
+      margin-bottom: 0.75rem;
+      padding: 0.5rem;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .tool-list li:last-child {
+      border-bottom: none;
+    }
+    .example-table {
+      background-color: #ffffff;
+      border-radius: 0.5rem;
+      overflow: hidden;
+    }
+    .example-table th {
+      background-color: #f1f5f9;
+      padding: 0.75rem 1rem;
+    }
+    .example-table td {
+      padding: 1rem;
+    }
+    /* 响应式调整 */
+    @media (max-width: 768px) {
+      .section-box {
+        padding: 1rem;
+      }
+      .scene-section {
+        padding: 1rem;
+      }
+    }
+    /* 添加新样式 */
+    .page-header {
+      background: #ffffff;
+      padding: 2rem;
+      border-radius: 0.75rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+    .page-title {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #1f2937;
+      margin-bottom: 1rem;
+    }
+    .page-meta {
+      color: #64748b;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1rem;
+    }
+    .content-section {
+      margin-bottom: 4rem;
+    }
+    .section-header {
+      font-size: 1.875rem;
+      font-weight: bold;
+      color: #1f2937;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid #dbeafe;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 min-h-screen relative pb-20">
+  <!-- Navigation -->
+  <nav class="bg-white border-b border-gray-200 py-4">
+    <div class="container mx-auto px-4">
+      <div class="flex items-center justify-between">
+        <a href="/" class="text-2xl font-bold text-gray-800">Blessing AI</a>
+        <div class="flex items-center gap-6">
+          <a href="/" class="text-gray-500 hover:text-gray-800 transition-colors">Home</a>
+          <a href="/blog" class="text-gray-500 hover:text-gray-800 transition-colors">Blog</a>
+          <a href="#about" class="text-gray-500 hover:text-gray-800 transition-colors">About Us</a>
+          <span class="text-gray-500">|</span>
+          <a href="1.html" class="text-gray-500 hover:text-gray-800 transition-colors">中文</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="w-[90%] lg:w-[80%] mx-auto px-4 py-12">
+    <!-- Page Title -->
+    <header class="page-header">
+      <h1 class="page-title">AI Short Film Production Basics</h1>
+      <div class="page-meta">
+        <span>📅 2025-02-23</span>
+      </div>
+    </header>
+
+    <!-- Tools List -->
+    <section class="content-section">
+      <h2 class="section-header">🛠️ Tools List</h2>
+      <div class="section-box">
+        <ul class="tool-list list-disc pl-5 text-gray-800">
+          <li><strong>DeepSeek Chat / ChatGPT</strong>: For script generation (Links: <a href="https://chat.deepseek.com" target="_blank" rel="nofollow noopener noreferrer" class="underline">DeepSeek Chat</a> or <a href="https://chat.openai.com" target="_blank" rel="nofollow noopener noreferrer" class="underline">ChatGPT</a>)</li>
+          <li><strong>Midjourney</strong>: Generate storyboard scenes (Link: <a href="https://www.midjourney.com/app" target="_blank" rel="nofollow noopener noreferrer" class="underline">Midjourney</a>)</li>
+          <li><strong>Kling AI</strong>: Generate video drafts and animation effects (Link: <a href="https://www.kling.ai" target="_blank" rel="nofollow noopener noreferrer" class="underline">Kling AI</a>)</li>
+          <li><strong>Hailuo AI</strong>: Voice-over production (Link: <a href="https://www.hailuo.ai" target="_blank" rel="nofollow noopener noreferrer" class="underline">Hailuo AI</a>)</li>
+          <li><strong>Udio</strong>: Add background music (Link: <a href="https://udio.com" target="_blank" rel="nofollow noopener noreferrer" class="underline">Udio</a>)</li>
+          <li><strong>CapCut</strong>: Post-production editing and subtitles (Link: <a href="https://www.capcut.com" target="_blank" rel="nofollow noopener noreferrer" class="underline">CapCut</a>)</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Production Steps -->
+    <section class="content-section">
+      <h2 class="section-header">📝 Film Production Steps</h2>
+      <div class="space-y-8">
+        <!-- Step 1: AI Script Writing -->
+        <section class="section-box">
+          <h3 class="step-title">Step 1: AI Script Writing</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="space-y-4 text-gray-800">
+              <p>
+                Use <a href="https://chat.deepseek.com" target="_blank" rel="nofollow noopener noreferrer" class="underline">DeepSeek Chat</a> or <a href="https://chat.openai.com" target="_blank" rel="nofollow noopener noreferrer" class="underline">ChatGPT</a> to quickly develop the script. Example prompt:
+              </p>
+              <div class="prompt-box">
+                Please write a 3-minute video script with the theme "GOD IS SPEAKING". Requirements:
+                1. Set in modern urban life, showcasing miraculous moments throughout the day
+                2. Convey divine revelation and warmth through details of light and objects
+                3. Divide into six segments: opening(10s), morning(40s), commute(30s), workplace(50s), return journey(40s), ending(10s)
+                4. Highlight miraculous elements in each scene, ensuring continuity
+                5. Overall style should be authentic and emotionally engaging
+              </div>
+            </div>
+            <div>
+              <table class="w-full border-collapse border border-gray-300">
+                <tr class="bg-gray-100">
+                  <th class="py-2 px-2 text-left border border-gray-300">Operation Steps</th>
+                  <th class="py-2 px-2 text-left border border-gray-300">Practical Examples</th>
+                </tr>
+                <tr>
+                  <td class="py-2 px-2 border border-gray-300">Input Theme Outline</td>
+                  <td class="py-2 px-2 border border-gray-300">
+                    Theme: <strong>GOD IS SPEAKING</strong><br>
+                    Segments: Opening 10s, Morning 40s, Commute 30s, Workplace 50s, Return 40s, Ending 10s<br>
+                    Style: Modern urban, Light miracles, Authentic emotion
+                  </td>
+                </tr>
+                <tr>
+                  <td class="py-2 px-2 border border-gray-300">Scene Description</td>
+                  <td class="py-2 px-2 border border-gray-300">
+                    Opening: "At dawn, golden sunlight breaks through the city skyline..."<br>
+                    Morning: "Alarm rings, the first ray of sunlight casts supernatural shadows..."<br>
+                    Commute: "A white bird appears in the rearview mirror, roadside signs flutter in the wind..."
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- Step 2: AI Generate Storyboard -->
+        <section class="section-box">
+          <h3 class="step-title">Step 2: AI Generate Storyboard</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="space-y-4 text-gray-800">
+              <div class="prompt-box">
+                Midjourney prompt:<br>
+                "City skyline at dawn, golden sunlight breaking through clouds, mysterious light shimmering between clouds, cinematic composition, high contrast, interplay of light and shadow --ar 16:9 --v 5 --style raw --q 2"
+              </div>
+            </div>
+            <div>
+              <table class="w-full border-collapse border border-gray-300">
+                <tr class="bg-gray-100">
+                  <th class="py-2 px-2 text-left border border-gray-300">Operation Steps</th>
+                  <th class="py-2 px-2 text-left border border-gray-300">Practical Examples</th>
+                </tr>
+                <tr>
+                  <td class="py-2 px-2 border border-gray-300">Scene Description</td>
+                  <td class="py-2 px-2 border border-gray-300">
+                    Morning: "Indoor morning scene, sunlight through curtains, creating mysterious light patterns on the wall, light flower effect --ar 16:9 --v 5"
+                  </td>
+                </tr>
+                <tr>
+                  <td class="py-2 px-2 border border-gray-300">Other Scenes</td>
+                  <td class="py-2 px-2 border border-gray-300">
+                    Workplace: "Meeting room interior, focus on glowing note, colleagues giving meaningful glances, cinematic feel --ar 16:9 --v 5"
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- Step 3: Generate Video -->
+        <section class="section-box">
+          <h3 class="step-title">Step 3: Generate Video</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="space-y-4 text-gray-800">
+              <div class="prompt-box">
+                Kling AI prompt:<br>
+                "1. Start with aerial view of city skyline
+                2. Add dynamic sunlight penetration effect
+                3. Use slow motion for light shimmering
+                4. Transition to black screen with glowing subtitles"
+              </div>
+            </div>
+            <div class="space-y-4">
+              <ul class="list-disc pl-5 text-gray-800">
+                <li>Import Midjourney images sequentially</li>
+                <li>Set duration for each scene</li>
+                <li>Add smooth transition effects</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Step 4: Voice-over Production -->
+        <section class="section-box">
+          <h3 class="step-title">Step 4: Voice-over Production</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="space-y-4 text-gray-800">
+              <div class="prompt-box">
+                Hailuo AI prompt:<br>
+                "Generate a whisper voiceover with requirements:
+                1. Use warm, magnetic young male voice
+                2. Speaking speed 0.9, solemn and mysterious tone
+                3. Genuine emotion with revelatory quality
+                4. Add echo effect at 'You, are being seen'
+                5. Include subtle morning breeze sounds"
+              </div>
+            </div>
+            <div>
+              <table class="w-full border-collapse border border-gray-300">
+                <tr class="bg-gray-100">
+                  <th class="py-2 px-2 text-left border border-gray-300">Operation</th>
+                  <th class="py-2 px-2 text-left border border-gray-300">Settings</th>
+                </tr>
+                <tr>
+                  <td class="py-2 px-2 border border-gray-300">Voice Selection</td>
+                  <td class="py-2 px-2 border border-gray-300">Young male, magnetic warmth, solemn tone</td>
+                </tr>
+                <tr>
+                  <td class="py-2 px-2 border border-gray-300">Audio Adjustments</td>
+                  <td class="py-2 px-2 border border-gray-300">Speed 0.9, echo effects, morning breeze ambiance</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- Step 5: Add Background Music -->
+        <section class="section-box">
+          <h3 class="step-title">Step 5: Add Background Music</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="space-y-4 text-gray-800">
+              <div class="prompt-box">
+                Udio prompt:<br>
+                "Create a soundtrack with requirements:
+                1. Opening using deep mysterious strings
+                2. Transition to warm piano melody
+                3. Add orchestral elements at climax
+                4. Return to solo piano for ending fadeout
+                5. Sync with video rhythm, emphasize key moments"
+              </div>
+            </div>
+            <div class="space-y-4">
+              <ul class="list-disc pl-5 text-gray-800">
+                <li>Select piano melody with string accompaniment</li>
+                <li>Add ambient sounds: city background, church bells</li>
+                <li>Adjust transition gradients</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Step 6: Post-production -->
+        <section class="section-box">
+          <h3 class="step-title">Step 6: Post-production Editing</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="space-y-4 text-gray-800">
+              <p>
+                Use CapCut to integrate all materials. Example instructions:
+              </p>
+              <div class="prompt-box">
+                Import video, voiceover and music assets, trim to appropriate duration, add fade transitions, insert synchronized subtitles for key shots, ensure smooth pacing and emotional delivery.
+              </div>
+            </div>
+            <div class="space-y-4">
+              <ul class="list-disc pl-5 text-gray-800">
+                <li>Import video/audio assets</li>
+                <li>Adjust clip durations and transitions</li>
+                <li>Balance audio levels and add titles</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <!-- Script Application Cases -->
+    <section class="content-section">
+      <h2 class="section-header">🎬 Script-Driven Tool Applications</h2>
+      <div class="section-box">
+        <div class="space-y-8">
+          <!-- Opening Scene -->
+          <div class="scene-section">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              <div class="space-y-4">
+                <h3 class="scene-title text-xl font-bold">【Opening】(0:00-0:10)</h3>
+                <p class="scene-description">
+                  Dawn breaks over city skyline with golden light piercing clouds, mysterious shimmer in sky. Black screen subtitle: "Miracles, Never Far Away", whisper voiceover: "You, are being seen..."
+                </p>
+              </div>
+              <div class="scene-prompts space-y-4">
+                <div class="prompt-box mb-4">
+                  <strong>Midjourney Prompts:</strong><br>
+                  "City skyline at dawn, golden sunlight through clouds, mysterious atmospheric lighting, cinematic framing --ar 16:9 --v 5 --style raw --q 2"
+                </div>
+                <div class="prompt-box mb-4">
+                  <strong>Kling AI Effects:</strong><br>
+                  "1. Panoramic city opening shot<br>
+                  2. Dynamic sunlight through clouds<br>
+                  3. Slow-motion light effects<br>
+                  4. Glowing subtitle transition"
+                </div>
+                <div class="prompt-box">
+                  <strong>Audio Design:</strong><br>
+                  "Whisper voiceover with echo effect, orchestral build-up"
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Morning Scene -->
+          <div class="scene-section">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              <div class="space-y-4">
+                <h3 class="scene-title text-xl font-bold">【Morning】(0:11-0:50)</h3>
+                <p class="scene-description">
+                  Alarm clock rings, morning light creates supernatural shadow patterns on wall. Glowing note: "Your Everything Matters".
+                </p>
+              </div>
+              <div class="scene-prompts space-y-4">
+                <div class="prompt-box mb-4">
+                  <strong>Midjourney Scenes:</strong><br>
+                  "1. Bedroom interior, morning light through curtains, wall light patterns --ar 16:9 --v 5<br>
+                  2. Nightstand close-up, glowing note with halo --ar 16:9 --v 5"
+                </div>
+                <div class="prompt-box mb-4">
+                  <strong>Kling AI Animation:</strong><br>
+                  "1. Alarm clock vibration effect<br>
+                  2. Dynamic light projection<br>
+                  3. Text glow animation<br>
+                  4. Smooth scene transitions"
+                </div>
+                <div class="prompt-box">
+                  <strong>Sound Design:</strong><br>
+                  "Alarm clock fade-out, morning birdsong, musical crescendo"
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Continue with other scenes... -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Return Button -->
+    <div class="mt-12 text-center">
+      <a href="/blog" class="text-blue-400 hover:text-blue-300 text-lg">Back to Article List</a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="absolute bottom-0 left-0 right-0 bg-gradient-to-r from-[#01090F] to-[#071B2A] border-t border-[#1F5C79]/20">
+    <div class="container mx-auto px-4">
+      <div class="py-4 flex justify-center items-center gap-6">
+        <div class="flex items-center gap-6">
+          <a href="#about" class="text-xs text-gray-400 hover:text-[#1F5C79] transition-colors">About Us</a>
+          <a href="#guide" class="text-xs text-gray-400 hover:text-[#1F5C79] transition-colors">User Guide</a>
+          <a href="#contact" class="text-xs text-gray-400 hover:text-[#1F5C79] transition-colors">Contact Us</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html> 

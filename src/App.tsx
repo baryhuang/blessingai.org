@@ -14,6 +14,24 @@ import {
 } from 'lucide-react';
 import Blog from './components/Blog';
 
+const globalStyles = `
+  @keyframes glow {
+    0% {
+      opacity: 0.8;
+      text-shadow: 0 0 20px rgba(99, 179, 237, 0.4);
+    }
+    50% {
+      opacity: 1;
+      text-shadow: 0 0 40px rgba(99, 179, 237, 0.8),
+                   0 0 80px rgba(99, 179, 237, 0.4);
+    }
+    100% {
+      opacity: 0.8;
+      text-shadow: 0 0 20px rgba(99, 179, 237, 0.4);
+    }
+  }
+`;
+
 function ToolCard({ 
   icon: Icon, 
   title, 
@@ -183,6 +201,7 @@ function Footer() {
 function Navigation() {
   return (
     <nav className="bg-gradient-to-r from-[#01090F] to-[#071B2A] border-b border-[#1F5C79]/20 py-4">
+      <style>{globalStyles}</style>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
@@ -191,7 +210,12 @@ function Navigation() {
               <circle cx="16" cy="16" r="2" fill="currentColor"/>
               <path d="M24 8L26 6M8 24L6 26M24 24L26 26M8 8L6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
             </svg>
-            <span className="text-2xl font-bold text-white">智慧事工平台</span>
+            <span className="text-2xl font-bold text-white animate-glow" style={{ 
+              animation: 'glow 2s ease-in-out infinite',
+              textShadow: '0 0 20px rgba(99, 179, 237, 0.6)'
+            }}>
+              圣光工坊
+            </span>
           </Link>
           <div className="flex items-center gap-6">
             <Link to="/" className="text-gray-300 hover:text-white transition-colors">
@@ -256,11 +280,14 @@ function HomePage() {
   return (
     <div className="container mx-auto px-4 pt-8">
       <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold text-white mb-4">
-          智慧事工平台
+        <h1 className="text-4xl font-bold text-white mb-4 animate-glow" style={{ 
+          animation: 'glow 2s ease-in-out infinite',
+          textShadow: '0 0 30px rgba(99, 179, 237, 0.8)'
+        }}>
+          圣光工坊
         </h1>
         <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-          為現代事工提供智能化工具，讓福音傳播更加便捷高效
+          為現代事工提供智能化工具，讓聖光傳播更加溫暖高效
         </p>
       </div>
 
